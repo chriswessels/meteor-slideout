@@ -1,22 +1,25 @@
 Package.describe({
   name: 'chriswessels:slideout',
-  version: '0.0.1',
+  version: '0.1.0',
   // Brief, one-line summary of the package.
-  summary: '',
+  summary: 'A touch slideout navigation menu for your mobile web apps',
   // URL to the Git repository containing the source code for this package.
-  git: '',
+  git: 'https://github.com/chriswessels/meteor-slideout',
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
   documentation: 'README.md'
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.0.3.2');
-  api.addFiles('chriswessels:slideout.js');
+  api.versionsFrom('1.0');
+  /* Add Slideout.js */
+  api.addFiles('lib/dist/slideout.min.js', 'client');
+  api.addFiles('export.js', 'client');
+  api.export('Slideout');
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
   api.use('chriswessels:slideout');
-  api.addFiles('chriswessels:slideout-tests.js');
+  api.addFiles('test.js', 'client');
 });
