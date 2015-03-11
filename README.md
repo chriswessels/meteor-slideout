@@ -20,7 +20,21 @@ For usage extended instructions, please see the Slideout.js README Usage section
 
 ### Meteor-specific
 
-It isn't immediately obvious in the Slideout.js README, but you may want to add the following meta tags into your `<head>`:
+The `Slideout` object instantiation code should go into the rendered hook for the template that contains the DOM elements for your menu:
+
+```javascript
+Template.mySlideoutMenu.rendered = function () {
+  var template = this;
+  var slideout = new Slideout({
+    'panel': template.$('.panel').get(0),
+    'menu': template.$('.menu').get(0),
+    'padding': 256,
+    'tolerance': 70
+  });
+}
+```
+
+It isn't immediately obvious in the Slideout.js README, but you may want to add the following meta tags into your `<head>` for mobile:
 
 ```html
 <meta http-equiv="cleartype" content="on">
@@ -28,20 +42,6 @@ It isn't immediately obvious in the Slideout.js README, but you may want to add 
 <meta name="HandheldFriendly" content="True">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-```
-
-Also, the `Slideout` object instantiation code should go into a `Meteor.startup` in your client-only code:
-
-```javascript
-// client/app.js
-Meteor.startup(function () {
-  var slideout = new Slideout({
-    'panel': document.getElementById('panel'),
-    'menu': document.getElementById('menu'),
-    'padding': 256,
-    'tolerance': 70
-  });
-});
 ```
 
 ## License
