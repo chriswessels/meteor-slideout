@@ -47,6 +47,7 @@ function Slideout(options) {
   this._moved = false;
   this._opened = false;
   this._preventOpen = false;
+  this._touch = options.touch == undefined ? true : options.touch && true;
 
   // Sets panel
   this.panel = options.panel;
@@ -63,7 +64,9 @@ function Slideout(options) {
   this._padding = parseInt(options.padding, 10) || 256;
 
   // Init touch events
-  this._initTouchEvents();
+  if(this._touch) {
+    this._initTouchEvents();
+  }
 }
 
 /**
@@ -158,6 +161,9 @@ Slideout.prototype._initTouchEvents = function() {
    * Resets values on touchstart
    */
   this.panel.addEventListener(touch.start, function(eve) {
+
+    if (typeof eve.touches === 'undefined') { return; }
+
     self._moved = false;
     self._opening = false;
     self._startOffsetX = eve.touches[0].pageX;
@@ -187,7 +193,7 @@ Slideout.prototype._initTouchEvents = function() {
    */
   this.panel.addEventListener(touch.move, function(eve) {
 
-    if (scrolling || self._preventOpen) { return; }
+    if (scrolling || self._preventOpen || typeof eve.touches === 'undefined') { return; }
 
     var dif_x = eve.touches[0].clientX - self._startOffsetX;
     var translateX = self._currentOffsetX = dif_x;
