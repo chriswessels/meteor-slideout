@@ -23,7 +23,7 @@
 
     $ spm install slideout
 
-    $ bower install https://github.com/Mango/slideout.git
+    $ bower install slideout.js
 
     $ component install mango/slideout
 
@@ -84,7 +84,7 @@ body {
 }
 ```
 
-Then you just include Slideout.js and create a new instace with some options:
+Then you just include Slideout.js and create a new instance with some options:
 
 ```html
 <script src="dist/slideout.min.js"></script>
@@ -154,7 +154,7 @@ Then you just include Slideout.js and create a new instace with some options:
 
     <main id="panel">
       <header>
-        <button>☰</button>
+        <button class="toggle-button">☰</button>
         <h2>Panel</h2>
       </header>
     </main>
@@ -166,6 +166,11 @@ Then you just include Slideout.js and create a new instace with some options:
         'menu': document.getElementById('menu'),
         'padding': 256,
         'tolerance': 70
+      });
+
+      // Toggle button
+      document.querySelector('.toggle-button').addEventListener('click', function() {
+        slideout.toggle();
       });
     </script>
 
@@ -193,6 +198,7 @@ Create a new instance of `Slideout`.
 - `[options.fx]` (String) - The CSS effect to use when animating the opening and closing of the slideout. Default: `ease`.
 - `[options.padding]` (Number) - Default: `256`.
 - `[options.tolerance]` (Number) - Default: `70`.
+- `[options.touch]` (Boolean) - Set this option to false to disable Slideout touch events. Default: `true`.
 
 ```js
 var slideout = new Slideout({
@@ -246,6 +252,22 @@ $ npm test
 
 ```
 $ npm run hint
+```
+
+## FAQ
+
+### How to add a toggle button.
+
+```js
+// vanilla js
+document.querySelector('.toggle-button').addEventListener('click', function() {
+  slideout.toggle();
+});
+
+// jQuery
+$('.toggle-button').on('click', function() {
+    slideout.toggle();
+});
 ```
 
 ## With ❤ by
