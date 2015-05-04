@@ -1,6 +1,6 @@
 Package.describe({
   name: 'chriswessels:slideout',
-  version: '0.1.7',
+  version: '0.1.9',
   // Brief, one-line summary of the package.
   summary: 'A touch slideout navigation menu for your mobile web apps',
   // URL to the Git repository containing the source code for this package.

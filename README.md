@@ -23,7 +23,7 @@ For usage extended instructions, please see the Slideout.js README Usage section
 The `Slideout` object instantiation code should go into the rendered hook for the template that contains the DOM elements for your menu:
 
 ```javascript
-Template.mySlideoutMenu.rendered = function () {
+Template.mySlideoutMenu.onRendered(function () {
   var template = this;
   var slideout = new Slideout({
     'panel': template.$('.panel').get(0),
@@ -31,7 +31,7 @@ Template.mySlideoutMenu.rendered = function () {
     'padding': 256,
     'tolerance': 70
   });
-}
+});
 ```
 
 It isn't immediately obvious in the Slideout.js README, but you may want to add the following meta tags into your `<head>` for mobile:
