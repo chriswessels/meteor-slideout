@@ -2,7 +2,7 @@
 
 A smart-package that bundles [Slideout.js](https://github.com/mango/slideout) for touch slideout navigation for your mobile web apps.
 
-## Demo
+## Slideout.js
 
 <img src="https://i.imgur.com/AWgwlVW.gif" alt="Slideout.js demo">
 
@@ -12,37 +12,49 @@ In your Meteor.js project directory, run
 
     $ meteor add chriswessels:slideout
 
-## Usage
+## Example
+
+See example usage with `iron-router` based routing [here](https://github.com/chriswessels/meteor-slideout/tree/master/example).
+
+Please also see the Slideout.js README: [https://github.com/Mango/slideout/blob/master/README.md#usage](https://github.com/Mango/slideout/blob/master/README.md).
+
+### Meteor-specific Tips
 
 This package just handles bundling the Slideout.js library into your Meteor.js project.
 
-For usage extended instructions, please see the Slideout.js README Usage section: [https://github.com/Mango/slideout/blob/master/README.md#usage](https://github.com/Mango/slideout/blob/master/README.md#usage)
+The `Slideout` object instantiation code should go into the rendered hook for the template that contains the DOM elements for your menu (ideally your layout):
 
-### Meteor-specific
-
-The `Slideout` object instantiation code should go into the rendered hook for the template that contains the DOM elements for your menu:
+You might want to make the slideout instance a global variable so that you can access the utility methods (like `.close()`) from your other code (e.g. routing hooks).
 
 ```javascript
-Template.mySlideoutMenu.onRendered(function () {
+Template.MasterLayout.onRendered(function () {
   var template = this;
-  var slideout = new Slideout({
-    'panel': template.$('.panel').get(0),
+  slideoutInstance = new Slideout({
     'menu': template.$('.menu').get(0),
+    'panel': $('.content').get(0),
     'padding': 256,
     'tolerance': 70
   });
 });
 ```
 
-It isn't immediately obvious in the Slideout.js README, but you may want to add the following meta tags into your `<head>` for mobile:
+Your `<head>` should contain the following meta directives to best display your app on mobile devices:
 
 ```html
-<meta http-equiv="cleartype" content="on">
-<meta name="MobileOptimized" content="320">
-<meta name="HandheldFriendly" content="True">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<head>
+  <meta http-equiv="cleartype" content="on">
+  <meta name="MobileOptimized" content="320">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
 ```
+
+Also don't forget to include the CSS in the [Slideout.js README](https://github.com/Mango/slideout/blob/master/README.md). See [example](https://github.com/chriswessels/meteor-slideout/tree/master/example) too.
+
+## Versioning
+
+It looks like the Slideout.js team have stopped tagging new releases on Github. This is problematic as it becomes difficult to track which version of their plugin is bundled in the smart package. I will continue to release new versions of this smart package, following the scheme: `SLIDEOUT-GITHUB-TAG`_`RELEASE-NUMBER-UNDER-THAT-TAG`.
 
 ## License
 
