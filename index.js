@@ -66,8 +66,9 @@ function Slideout(options) {
   this.menu = options.menu;
 
   // Sets  classnames
-  this.panel.className += ' slideout-panel';
-  this.menu.className += ' slideout-menu';
+  if(this.panel.className.search('slideout-panel') === -1) { this.panel.className += ' slideout-panel'; }
+  if(this.menu.className.search('slideout-menu') === -1) { this.menu.className += ' slideout-menu'; }
+
 
   // Sets options
   this._fx = options.fx || 'ease';
@@ -190,7 +191,7 @@ Slideout.prototype._initTouchEvents = function() {
     self._moved = false;
     self._opening = false;
     self._startOffsetX = eve.touches[0].pageX;
-    self._preventOpen = (!self.isOpen() && self.menu.clientWidth !== 0);
+    self._preventOpen = (!self._touch || (!self.isOpen() && self.menu.clientWidth !== 0));
   });
 
   /**
@@ -244,6 +245,16 @@ Slideout.prototype._initTouchEvents = function() {
 
   });
 
+};
+
+Slideout.prototype.enableTouch = function() {
+  this._touch = true;
+  return this;
+};
+
+Slideout.prototype.disableTouch = function() {
+  this._touch = false;
+  return this;
 };
 
 /**
