@@ -3,7 +3,7 @@
 HAMMER_GIT_REPO="git@github.com:Mango/slideout.git"
 
 # Do not edit below
-git remote -v | grep -q slideout
+git remote -v | grep -q Mango/slideout
 if [ $? -eq 1 ]; then
   git remote add slideout $HAMMER_GIT_REPO
 fi
